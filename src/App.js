@@ -3,12 +3,7 @@ import React from "react"
 import Ribbon from "./Ribbon"
 import TeamCards from "./TeamCards"
 import PlayerCards from "./PlayerCards"
-// import SubmitButton from "./SubmitButton"
-import SearchBar from "./SearchBar"
 import PlayerStats from "./PlayerStats"
-
-
-import SubmitButton from "./SubmitButton"
 
 class App extends React.Component{
     constructor(props){
@@ -53,6 +48,8 @@ class App extends React.Component{
         fetch(`https://lookup-service-prod.mlb.com/json/named.team_all_season.bam?sport_code=%27mlb%27&all_star_sw=%27N%27&sort_order=name_asc&season=%27${rosterYear}%27`)
             .then(prom =>prom.json())
             .then(data => {  
+                console.log('set state select team')
+                console.log(data.team_all_season.queryResults.row)
                 this.setState({
                     drillDown: 'selectTeam',
                     data: data.team_all_season.queryResults.row
@@ -66,6 +63,7 @@ class App extends React.Component{
         fetch(`https://lookup-service-prod.mlb.com/json/named.roster_team_alltime.bam?start_season=%27${rosterYear-1}%27&end_season=%27${rosterYear}%27&team_id=%27${teamID}%27`)
             .then(response => response.json())
             .then(data => {
+                console.log(data.roster_team_alltime.queryResults.row)
                 this.setState({
                     drillDown: 'selectPlayer',
                     data: data.roster_team_alltime.queryResults.row
@@ -198,7 +196,7 @@ class App extends React.Component{
             
 
             //Submit Button props
-            buttonClassName='btn btn-primary mb-2'
+            buttonClassName='btn btn-outline-primary data-bs-toggle="button"'
             />
 
         switch(drillDown){
@@ -216,17 +214,22 @@ class App extends React.Component{
                             mlb_org_brief,
                             venue_name,
                             division_abbrev,
-                            mlb_org_id
+                            mlb_org_id,
+                            address_city,
+                            state
                         } = teamData;
                     
                     return(
                         //and then here!
                         <div className='container'>
                             <TeamCards 
-                                name={mlb_org_brief}
                                 teamName={name_display_full}
+                                name={mlb_org_brief}
                                 venueName={venue_name}
                                 league={division_abbrev}
+                                city = {address_city}
+                                state={state}
+
                                 onClick={() => this.handleTeamClick(mlb_org_id)}
                                 />
                         </div>
@@ -250,10 +253,14 @@ class App extends React.Component{
                     return(
                         <PlayerCards
                             playerName={name_first_last}
-                            posDes={position_desig}
-                            primPos={primary_position}
                             bats={bats}
                             throws={throws}
+                            height_feet={height_feet}
+                            height_inches={height_inches}
+
+                            posDes={position_desig}
+                            primPos={primary_position}
+                            birth_date={birth_date}
                             jerseyNumber={jersey_number}
                             onClick={() => this.handlePlayerClick(player_id)}
                         />

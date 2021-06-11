@@ -9,10 +9,9 @@ function SubmitButton(props){
        //<input type="submit" value="Submit" />
         <button 
             type='submit'
-            className='btn btn-outline-primary'
+            className= {props.className} //'btn btn-outline-primary'
             id="btnOK"
             role= "submit"
-            //value='OK'
             >Go
             </button>
     )
