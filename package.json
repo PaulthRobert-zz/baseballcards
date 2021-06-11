@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --config webpack.config.js serve --hot --open",
+    "start": "webpack serve",
     "build": "webpack --config webpack.config.js --mode production"
   },
   "author": "Paul Robert Davis",
@@ -17,12 +17,14 @@
     "css-loader": "^4.2.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^15.1.1",
+    "react-dom": "^15.1.1",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
+    "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@webpack-cli/serve": "^1.5.1"
+  }
 }
