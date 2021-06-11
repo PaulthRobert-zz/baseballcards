@@ -1,10 +1,10 @@
-// App.js
-
 import React from "react"
-import ReactDom from "react-dom"
 
-const App = () => (
+
+let App = () => (
     <div>
         Paul R. Davis
     </div>
 );
+
+export default App;
